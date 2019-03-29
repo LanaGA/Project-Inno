@@ -1,13 +1,11 @@
 package JenkinsDotNet.Model;
 
-import JenkinsDotNet.*;
-
-import java.util.*;
+import org.w3c.dom.Document;
 
 /**
  * Represents an individual job
  */
-public class Build extends JenkinsModel<Build> {
+public abstract class Build extends JenkinsModel<Build> {
     /**
      * Gets the build number.
      *
@@ -15,7 +13,7 @@ public class Build extends JenkinsModel<Build> {
      */
     private String Number;
 
-    public final String getNumber() {
+    public String getNumber() {
         return Number;
     }
 
@@ -82,7 +80,6 @@ public class Build extends JenkinsModel<Build> {
     public final void setJob(Job value) {
         Job = value;
     }
-    //TODO:Add other fields
 
     /**
      * Parses a build from Jenkins API XML.
@@ -90,21 +87,11 @@ public class Build extends JenkinsModel<Build> {
      * @param element XML fragment representing a build
      * @return <c>true</c> if XML was valid, <c>false</c> otherwise
      */
-    @Override
-    protected boolean ParseFromXml(Object element) {
+    protected boolean ParseFromXml(Document element) {
         if (element == null) {
             return false;
         }
-		/*ArrayList<Object> elements = element.Elements().ToList();
-		// Number
-		setNumber(elements.First(x -> x.Name.equals("number")).Value);
-		// Url
-		setUrl(elements.First(x -> x.Name.equals("url")).Value);
-		// ShortDescription
-		setShortDescription(elements.Where(x -> x.Name.equals("shortDescription")).Select(x -> x.Value).FirstOrDefault());
-		// FullName
-		setFullDisplayName(elements.Where(x -> x.Name.equals("fullDisplayName")).Select(x -> x.Value).FirstOrDefault());
-		*/
+
         return true;
     }
 }

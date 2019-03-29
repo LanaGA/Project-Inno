@@ -1,13 +1,13 @@
 package JenkinsDotNet.Model;
 
-import JenkinsDotNet.*;
+//import static org.simple.coollection.Coollection.*;
 
-import java.util.*;
+import org.w3c.dom.Document;
 
 /**
  * Represents an individual computer in a Jenkins cluster
  */
-public class Computer extends JenkinsModel<Computer> {
+public abstract class Computer extends JenkinsModel<Computer> {
     /**
      * Gets the build number.
      *
@@ -67,7 +67,7 @@ public class Computer extends JenkinsModel<Computer> {
     private void setOffline(boolean value) {
         Offline = value;
     }
-    //TODO:Add other fields
+
 
     /**
      * Parses a computer from Jenkins API XML.
@@ -75,28 +75,12 @@ public class Computer extends JenkinsModel<Computer> {
      * @param element XML fragment representing a masterComputer or slaveComputer
      * @return <c>true</c> if XML was valid, <c>false</c> otherwise
      */
-    @Override
-    protected boolean ParseFromXml(Object element) {
+//TODO: find a way to connect the project-library collection
+    protected boolean ParseFromXml(Document element) {
         if (element == null) {
             return false;
         }
-		/*ArrayList<Object> elements = element.Elements().ToList();
-		// DisplayName
-		setDisplayName(elements.First(x -> x.Name.equals("displayName")).Value);
-		// Icon
-		setIcon(elements.First(x -> x.Name.equals("icon")).Value);
-		// Idle
-		boolean idle;
-		tangible.OutObject<Boolean> tempOut_idle = new tangible.OutObject<Boolean>();
-		Boolean.TryParse(elements.Where(x -> x.Name.equals("idle")).Select(x -> x.Value).FirstOrDefault(), tempOut_idle);
-	idle = tempOut_idle.argValue;
-		setIdle(idle);
-		// Offline
-		boolean offline;
-		tangible.OutObject<Boolean> tempOut_offline = new tangible.OutObject<Boolean>();
-		Boolean.TryParse(elements.Where(x -> x.Name.equals("offline")).Select(x -> x.Value).FirstOrDefault(), tempOut_offline);
-	offline = tempOut_offline.argValue;
-		setOffline(offline);*/
+
         return true;
     }
 }

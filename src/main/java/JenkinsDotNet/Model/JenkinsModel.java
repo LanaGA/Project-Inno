@@ -1,10 +1,13 @@
 package JenkinsDotNet.Model;
 
+import org.w3c.dom.Document;
+
 /**
  * Base class for models, providing common functionality
  *
  * <typeparam name="T"></typeparam>
  */
+// TODO: find analog XElement
 public abstract class JenkinsModel<T extends JenkinsModel<T>> {
     /**
      * Read a model from an XML fragment.
@@ -12,10 +15,9 @@ public abstract class JenkinsModel<T extends JenkinsModel<T>> {
      * @param element XML fragment
      * @return Object of the current type
      */
-    public static <T> T FromXml(Object element) {
-       /* T newObj = new T();
-        return newObj.ParseFromXml(element) ? newObj : null;*/
+    public static <T> T FromXml(Document element) {
         return null;
+
     }
 
     /**
@@ -24,21 +26,6 @@ public abstract class JenkinsModel<T extends JenkinsModel<T>> {
      * @param element XML fragment representing a model
      * @return <c>true</c> if XML was valid, <c>false</c> otherwise
      */
-    protected abstract boolean ParseFromXml(Object element);
+    protected abstract boolean ParseFromXml(Document element);
 
-    /**
-     * Updates a model from another instance of the same model.
-     *
-     * @param source The source object
-     */
-    public void UpdateFrom(T source) {
-        // Iterate the Properties of the destination instance and
-        // populate them from their source counterparts
-        var destinationProperties = this.getClass();
-		/*for (var destinationPi : destinationProperties)
-		{
-			System.Reflection.PropertyInfo sourcePi = source.getClass().GetProperty(destinationPi.Name);
-			destinationPi.SetValue(this, sourcePi.GetValue(source, null), null);
-		}*/
-    }
 }
